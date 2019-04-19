@@ -13,7 +13,7 @@
 			<td><input type="text" name="loginName"><td/> 
 		</tr>
 		<tr>
-			<td><label id="pwdLbl">Password:</label></td>
+			<td><label id="passwordLbl">Password:</label></td>
 			<td><input type="password" name="password"><td/>
 		</tr>
 	 		<tr>	    

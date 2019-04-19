@@ -142,7 +142,7 @@ function check() {
 			    </tr>			    
 			    
 			    <tr>
-			   <td><label id="statusLbl">Marital Status:</label></td>
+			   <td><label id="maritalStatusLbl">Marital Status:</label></td>
 			        <td>
 			         <select name="maritalStatus">
 				        <option value="single">Single</option>
@@ -154,7 +154,8 @@ function check() {
 			    
 			<jsp:include page="addAddress.jsp"/>
 			<tr> <td>
-			  <input id="accept" type="checkbox" value="Accept"/> I accept
+			  <input id="accept" type="checkbox" value="Accept"/>
+			  <label id="acceptLabl" >I accept</label> 
 			  </td> </tr>
 			  
 			 <tr>

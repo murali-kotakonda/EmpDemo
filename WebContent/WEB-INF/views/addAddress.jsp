@@ -17,32 +17,32 @@
 	   			</tr>
 			   
 			     <tr>
-			        <td><label id="addr1Lbl">Address Line 1:</label> </td>
+			        <td><label id="addr1Lbl${i}">Address Line 1:</label> </td>
 			        <td><input type="text" name="addresses[${i}].addrLine1" /></td>
 			    </tr>
 			     
 			     <tr>
-			        <td><label id="addr2Lbl">Address Line 2:</label> </td>
+			        <td><label id="addr2Lbl${i}">Address Line 2:</label> </td>
 			        <td><input type="text" name="addresses[${i}].addrLine2" /></td>
 			    </tr>
 			    
 			    <tr>
-			        <td><label id="cityLbl">City:</label> </td>
+			        <td><label id="cityLbl${i}">City:</label> </td>
 			        <td><input type="text" name="addresses[${i}].city" /></td>
 			    </tr>
 			    
 			    <tr>
-			        <td><label id="stateLbl">State:</label> </td>
+			        <td><label id="stateLbl${i}">State:</label> </td>
 			        <td><input type="text" name="addresses[${i}].state" /></td>
 			    </tr>
 			    
 			    <tr>
-			        <td><label id="countryLbl">Country:</label> </td>
+			        <td><label id="countryLbl${i}">Country:</label> </td>
 			        <td><input type="text" name="addresses[${i}].country" /></td>
 			    </tr>
 			    
 			    <tr>
-			        <td><label id="pinLbl">Pin Code:</label> </td>
+			        <td><label id="pinLbl${i}">Pin Code:</label> </td>
 			        <td><input type="text"  name="addresses[${i}].pin" />
 			        
 			        <input type="hidden" name="addresses[${i}].addressType" value= "${i +1}"/>

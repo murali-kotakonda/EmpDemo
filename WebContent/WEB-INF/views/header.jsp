@@ -99,7 +99,8 @@ li.dropdown {
   
 <c:if test='${sessionScope["empSession"].admin}'>
   <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Department</a>
+    <a href="javascript:void(0)" class="dropbtn">
+    <label id="DepartmentLbl">Department</label></a>
     <div class="dropdown-content">
  	  <a  href="deptCreate">
  	  <label id="addDeptLbl">Add New Department</label>
