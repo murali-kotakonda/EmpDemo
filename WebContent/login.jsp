@@ -1,9 +1,15 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
-<title>Welcome to Online Registration</title>
+<title>Welcome to Employee Application</title>
 </head>
 <body>
+	<c:if test='${!empty sessionScope["empSession"]}'> 
+   		 <jsp:forward page="/empProfile"/>
+	</c:if>
 	<h1>Login Page</h1>
 	<font color="Red">${msg}</font>    
 		<form action="login" method = "POST" >
@@ -18,7 +24,7 @@
 		</tr>
 	 		<tr>	    
 			<td colspan="2" align="center">
-			<input type="submit" value="Login"></td>	
+			<input name="login" type="submit" value="Login"></td>	
 		</tr>
 		</table>
 		</form>
