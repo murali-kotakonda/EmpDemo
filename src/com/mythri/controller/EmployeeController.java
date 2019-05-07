@@ -38,6 +38,7 @@ import com.mythri.util.UserException;
  * Class to handle all Http Requests for employee. 
  *
  */
+
 @Controller
 public class EmployeeController {
 
@@ -59,11 +60,13 @@ public class EmployeeController {
 			@ModelAttribute(COMMAND) Employee employee, 
 			BindingResult result) {
 		try {
-			employeeService.addEmployee(employee);
+			employee = employeeService.addEmployee(employee);
 		} catch (UserException e) {
 			String msg = e.getMessage();
-			ModelAndView modelAndView = new ModelAndView("addEmployee", COMMAND,
-					employee);
+			CreateEmpDetails managerAndDepts = employeeService.getManagerAndDepts();
+			ModelAndView modelAndView = new ModelAndView("addEmployee", COMMAND, employee);
+			modelAndView.addObject("departments", managerAndDepts.getDepts());
+			modelAndView.addObject("managers", managerAndDepts.getEmps());
 			modelAndView.addObject("errorMsg", msg);
 			return modelAndView;
 		}
@@ -80,7 +83,7 @@ public class EmployeeController {
 		return modelAndView;
 	}
  
-		@RequestMapping(value = GET_EMP_BY_PAGE, method = RequestMethod.GET)
+	@RequestMapping(value = GET_EMP_BY_PAGE, method = RequestMethod.GET)
 	public String employeesList(
 			@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
 			Model model) {

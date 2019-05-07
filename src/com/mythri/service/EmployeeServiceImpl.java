@@ -24,12 +24,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	private EmployeeDao employeeDao;
 	
 	@Transactional
-	public void addEmployee(Employee employee) throws UserException {
+	public Employee addEmployee(Employee employee) throws UserException {
 		if(employeeDao.isEmployeeExists(employee.getLoginName()))
 			throw new UserException(ErrorCodes.ERROR2.getErrorCode(), ErrorCodes.ERROR2.getDesc());
 		employee.setJoinDate(new Date());
 		//mapEmployeeWithAddress(employee);
-		employeeDao.addEmployee(employee);
+		return employeeDao.addEmployee(employee);
 	}
 
 	private void mapEmployeeWithAddress(Employee employee) {

@@ -10,7 +10,7 @@ import com.mythri.util.UserException;
 
 public interface EmployeeService {
 	
-	public void addEmployee(Employee employee) throws UserException;
+	public Employee addEmployee(Employee employee) throws UserException;
 
 	public ResponseDTO<Employee> getEmployees(int pageNo);
 	

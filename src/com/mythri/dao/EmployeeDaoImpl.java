@@ -39,13 +39,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	private static final int RESULT_PER_PAGE = 5;
 
-	public void addEmployee(Employee employee) {
+	public Employee addEmployee(Employee employee) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		session.save(employee);// 1 row in emp table and 2 rows in address table
 		transaction.commit();
 		session.close();
+		return getEmployee(employee.getId());
 	}
 
 	@Override

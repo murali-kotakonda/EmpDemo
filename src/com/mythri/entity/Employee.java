@@ -30,7 +30,10 @@ value =
  + " LEFT JOIN FETCH e.manager mgr "
  + " where e.loginName=:eName and e.password=:ePass"),
  @NamedQuery(name =Employee.CHECK_EMP_EXISTS,query = "select count(*) from Employee  where loginname=:inputName"),
- @NamedQuery(name =Employee.GET_EMPLOYEE_WITH_ADDRESSES,query = "from Employee e LEFT JOIN FETCH e.addresses a where e.id=:id "),
+ @NamedQuery(name =Employee.GET_EMPLOYEE_WITH_ADDRESSES,query = 
+ "from Employee e LEFT JOIN FETCH e.addresses a  "
+ + "LEFT JOIN FETCH e.manager mgr "
+ + "where e.id=:id"),
  @NamedQuery(name =Employee.GET_MANAGER_INFO,query = "select id,fName,lName from Employee where designation='Manager' OR designation='MANAGER'"),
  @NamedQuery(name =Employee.GET_BASIC_EMP_DETAILS,query = "select id,fName,lName from Employee "),
  @NamedQuery(name =Employee.GET_DEPT_INFO,query = "select id,name from Department")

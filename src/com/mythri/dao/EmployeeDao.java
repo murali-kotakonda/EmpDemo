@@ -9,7 +9,7 @@ import com.mythri.entity.Employee;
 
 public interface EmployeeDao {
 	
-	public void addEmployee(Employee employee);
+	public Employee addEmployee(Employee employee);
 
 	public boolean isEmployeeExists(String str);
 	
