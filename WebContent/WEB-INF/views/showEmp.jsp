@@ -35,7 +35,7 @@
 		</tr>
 		
 		<tr>
-			<td><label id="managerLbl">Manager Name:</label></td> <td> ${manager.fName} , ${manager.lName}</td>
+			<td><label id="managerLbl">Manager Name:</label></td> <td> ${employee.manager.fName} , ${employee.manager.lName}</td>
 		</tr>
 		
 		<tr>

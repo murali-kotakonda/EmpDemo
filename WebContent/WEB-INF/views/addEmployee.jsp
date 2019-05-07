@@ -8,7 +8,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	</head>
 	<script type="text/javascript">
-function check() {
+
+	function check() {
 	
 	 var loginName = document.forms["empCreate"]["loginName"];
 	 var password = document.forms["empCreate"]["password"] ;
@@ -39,6 +40,11 @@ function check() {
 		 mobileNo.focus() ;
 	     return false;
 	 }
+	 if(mobileNo.value.length != 10){
+		 alert( "mobileNo has to be minimum 10 digits!" );
+		 mobileNo.focus() ;
+	     return false;
+	 }
 	 
 	 if(salary.value == "" ){
 		 alert( "Please provide Salary!" );
@@ -46,6 +52,15 @@ function check() {
 	     return false;
 	 }
 	 return true;
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
 }
 </script>
 
@@ -76,13 +91,13 @@ function check() {
 			    <tr>
 			        <td><label id="desigLbl">Designation:</label> </td>
 			        <td>
-			        <select name="designation">
-				        <option value="Associate Engineer">Associate Engineer</option>
-				        <option value="Senior Engineer">Senior Engineer</option>
-				        <option value="Analyst">Analyst</option>
-				        <option value="System Engineer">System Engineer</option>
-				        <option value="Manager">Manager</option>
-				        </select> 
+			        <form:select path="designation">
+				        <form:option value="Associate Engineer">Associate Engineer</form:option>
+				        <form:option value="Senior Engineer">Senior Engineer</form:option>
+				        <form:option value="Analyst">Analyst</form:option>
+				        <form:option value="System Engineer">System Engineer</form:option>
+				        <form:option value="Manager">Manager</form:option>
+				     </form:select> 
 			        </td>
 			    </tr> 
 			    
@@ -102,20 +117,20 @@ function check() {
 			    <tr>
 			        <td><label id="statusLbl">Status:</label></td>
 			        <td>
-			        <select name="status">
-			      		<option value="Active">Active</option>
-			      		<option value="Inactive">Inactive</option>
-			      	</select>
+			        <form:select path="status">
+			      		<form:option value="Active">Active</form:option>
+			      		<form:option value="Inactive">Inactive</form:option>
+			      	</form:select>
 			        </td>
 			    </tr>
 			  
 			    <tr>
 			        <td><label id="deptLbl">Department:</label></td>
-			        <td><select name="department.id">
+			        <td><form:select path="department.id">
 			   		    <c:forEach items="${departments}" var="dept">
-			      			<option value="${dept.id}">${dept.name}</option>
+			      			<form:option value="${dept.id}">${dept.name}</form:option>
 			      		</c:forEach>
-			      		</select>
+			      		</form:select>
 					</td>
 			    </tr>
 			  
@@ -123,32 +138,32 @@ function check() {
 			   <tr>
 			        <td><label id="managerLbl">Manager :</label></td>
 			        <td>
-			      <select name="manager.id">
+			      <form:select path="manager.id">
 			      <c:forEach items="${managers}" var="manager">
-			      <option value="${manager.id}">${manager.fName} -  ${manager.lName} </option>
+			      <form:option value="${manager.id}">${manager.fName} -  ${manager.lName} </form:option>
 			      </c:forEach>
-			      </select>
+			      </form:select>
 			        </td>
 			    </tr>
 
 		 	    <tr>
 			        <td><label id="empSalLbl">Employee Salary:</label></td>
-			        <td><form:input path="salary" /></td>
+			        <td><form:input path="salary" onkeypress="return isNumber(event)"/></td>
 			    </tr>
 				
 				<tr>
 			   <td><label id="mnoLbl">Mobile No:</label></td>
-			        <td><form:input path="mobileNo" /></td>
+			        <td><form:input path="mobileNo" onkeypress="return isNumber(event)"/></td>
 			    </tr>			    
 			    
 			    <tr>
 			   <td><label id="maritalStatusLbl">Marital Status:</label></td>
 			        <td>
-			         <select name="maritalStatus">
-				        <option value="single">Single</option>
-				        <option value="divorsed">Divorsed</option>
-				        <option value="married">Married</option>
-				     </select> 
+			         <form:select path="maritalStatus">
+				        <form:option value="single">Single</form:option>
+				        <form:option value="divorsed">Divorsed</form:option>
+				        <form:option value="married">Married</form:option>
+				     </form:select> 
 			        </td>
 			    </tr>		
 			    

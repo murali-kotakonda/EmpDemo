@@ -8,8 +8,8 @@
 <title>Employee Management App- Change Pass</title>
 </head>
 <script type="text/javascript">
+
 function check() {
-	
 	 var currPass = document.forms["changePass"]["currPass"];
 	 var newPass = document.forms["changePass"]["newPass"] ;
 	 var confirmPass = document.forms["changePass"]["confirmPass"];
@@ -33,6 +33,7 @@ function check() {
 	 }
 	 return true;
 }
+
 </script>
 <body>
 	<jsp:include page="header.jsp" />
@@ -56,12 +57,10 @@ function check() {
 			    </tr>
 			    
 			     <tr>
-			        <td><input type="submit" name="Change Password" value="Change"></td>
+			        <td><input type="submit" 
+			        name="Change Password" value="Change"></td>
 			    </tr>
-			    
 			 </table>
-			    
 		</form>
-
 </body>
 </html>

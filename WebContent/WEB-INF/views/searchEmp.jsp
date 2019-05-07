@@ -15,7 +15,7 @@
 
 <form:form action="./searchEmp">
 <table>
-<tr><td><label id="searchEmpLbl">Search Employee</label> &nbsp;&nbsp;
+<tr><td><label id="searchEmployeeLbl">Search Employee</label> &nbsp;&nbsp;
 <input type="text" name="reqData"/>&nbsp;&nbsp;
 </td> 
 <td>

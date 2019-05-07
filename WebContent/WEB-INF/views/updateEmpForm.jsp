@@ -5,13 +5,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<script type="text/javascript">
+	function check() {
+	
+	 var loginName = document.forms["empUpdate"]["loginName"];
+	 var password = document.forms["empUpdate"]["password"] ;
+	 var fName = document.forms["empUpdate"]["fName"];
+	 var mobileNo = document.forms["empUpdate"]["mobileNo"];
+	 var salary = document.forms["empUpdate"]["salary"];
+	 
+	 if(loginName.value == "" ){
+		 alert( "Please provide loginName!" );
+		 loginName.focus() ;
+	     return false;
+	 }
+	 
+	 if(password.value == "" ){
+		 alert( "Please provide Password!" );
+		 password.focus() ;
+	     return false;
+	 }
+	 
+	 if(fName.value == "" ){
+		 alert( "Please provide first Name!" );
+		 fName.focus() ;
+	     return false;
+	 }
+	 
+	 if(mobileNo.value == "" ){
+		 alert( "Please provide mobile Number!" );
+		 mobileNo.focus() ;
+	     return false;
+	 }
+	 if(mobileNo.value.length != 10){
+		 alert( "mobileNo has to be minimum 10 digits!" );
+		 mobileNo.focus() ;
+	     return false;
+	 }
+	 
+	 if(salary.value == "" ){
+		 alert( "Please provide Salary!" );
+		 salary.focus() ;
+	     return false;
+	 }
+	 return true;
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+</script>
 <title>Update Employee Form</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
 	<h3>Updating Profile Screen</h3>
 	${errorMsg}
-	<form:form action="empUpdate" method="POST" commandName="command">
+	<form:form action="empUpdate" method="POST" commandName="command" onsubmit="return check();">
 		<table>
 		<tr>
 			<td><label id="IdLbl">ID</label></td> 
@@ -42,7 +97,8 @@
 		</tr>	
 		
 		<tr>
-			<td><label id="mnoLbl">Mobile No:</label></td> <td> <form:input path="mobileNo" /></td>
+			<td><label id="mnoLbl">Mobile No:</label></td> 
+			<td> <form:input path="mobileNo" onkeypress="return isNumber(event)"/></td>
 		</tr>	
 		
 		<tr>
