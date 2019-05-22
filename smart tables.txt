@@ -1,0 +1,157 @@
+create table customer
+(
+custid varchar2(20),
+first_name varchar2(20),
+last_name varchar2(20),
+password varchar2(20),
+paddr varchar2(100),
+peraddr varchar2(100),
+city varchar2(20),
+state varchar2(20),
+country varchar2(20),
+zip varchar2(20),
+pno varchar2(20),
+mno varchar2(20),
+wno varchar2(20),
+occu varchar2(20),
+email varchar2(50),
+date1 date,
+status varchar2(20)
+)
+/
+
+create sequence custseq
+minvalue 1001
+maxvalue 9999
+increment by 1
+/
+
+
+create table agent
+(
+agentid varchar2(20),
+first_name varchar2(20),
+last_name varchar2(20),
+password varchar2(20),
+paddr varchar2(100),
+peraddr varchar2(100),
+city varchar2(20),
+state varchar2(20),
+country varchar2(20),
+zip varchar2(20),
+pno varchar2(20),
+mno varchar2(20),
+wno varchar2(20),
+occu varchar2(20),
+proof varchar2(20),
+passportno varchar2(20),
+drivingno varchar2(20),
+email varchar2(50),
+date1 date,
+branchid varchar2(20),
+status varchar2(20)
+)
+/
+
+create sequence agentseq
+minvalue 1001
+maxvalue 9999
+increment by 1
+/
+
+create table admin
+(
+name varchar2(20), 
+password varchar2(20)
+)
+/
+
+insert into admin(name,password) values('admin','administrator')
+/
+
+
+
+create table branches
+(
+bid varchar2(20),
+bname varchar2(20),
+bcity varchar2(20),
+bstate varchar2(20),
+bcountry varchar2(20)
+)
+/
+
+create sequence branchidgen
+minvalue 1001
+maxvalue 9999
+increment by 1
+/
+
+
+create table transactions
+(
+tid varchar2(20),
+custid varchar2(20),
+agentid varchar2(20),
+payeeid varchar2(20),
+amount number(10),
+address varchar2(100),
+status varchar2(20),
+at_smt_date1 date,
+at_agent_date1 date,
+at_receipt_date1 date,
+receiptno varchar2(20),
+receivername varchar2(50),
+receiverpno varchar2(50),
+identity varchar2(50)
+)
+/
+
+
+create sequence transid
+minvalue 10001
+maxvalue 99999
+increment by 1
+
+
+create sequence receiptid
+minvalue 10001
+maxvalue 99999
+increment by 1
+
+
+
+
+create table payeeaddress
+(
+payeeid varchar2(20),
+custid varchar2(20),
+first_name varchar2(20),
+last_name varchar2(20),
+addr varchar2(100),
+city varchar2(20),
+state varchar2(20),
+country varchar2(20),
+zip varchar2(20),
+pno varchar2(20),
+mno varchar2(20),
+identity varchar2(20),
+email varchar2(50),
+date1 date
+)
+
+
+
+create sequence payeeidgen
+minvalue 1001
+maxvalue 9999
+increment by 1
+
+insert:
+--------
+insert into ss values('02-JAN-2010',to_date('02-JAN-2010','dd-mon-yyyy'))
+
+
+retrive
+---------
+to_char(b,'dd-mon-yyyy')
