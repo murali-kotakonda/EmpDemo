@@ -53,7 +53,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="scott" />
+		<property name="username" value="empdemo" />
 		<property name="password" value="oracle" />
 	</bean>
 
