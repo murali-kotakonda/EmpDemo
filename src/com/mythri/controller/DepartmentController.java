@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -78,10 +80,17 @@ public class DepartmentController {
 	}
 
 	@RequestMapping(value = GET_DEPTS, method = RequestMethod.GET)
-	public ModelAndView getDeps(ModelMap modelMap) {
+	public ModelAndView getDeps(ModelMap modelMap,HttpServletRequest req) {
 		List<Department> list = departmentService.listDepartments();
 		modelMap.put("depts", list);
-		return new ModelAndView("deptList", modelMap);
+		ModelAndView modelAndView = new ModelAndView("deptList", modelMap);
+		if(req.getAttribute("delMsg")!=null){
+			modelAndView.addObject("delMsg",(String)req.getAttribute("delMsg"));
+		}
+		if(req.getAttribute("errorMsg")!=null){
+			modelAndView.addObject("errorMsg",(String)req.getAttribute("errorMsg"));
+		}
+		return modelAndView;
 	}
 
 	@RequestMapping(value = SEARCH_DEPT, method = RequestMethod.GET)
@@ -101,14 +110,16 @@ public class DepartmentController {
 	}
 	
 	@RequestMapping(value = DEPT_DELETE, method = RequestMethod.GET)
-	public ModelAndView deleteDepartment(@RequestParam("id") int id) {
+	public ModelAndView deleteDepartment(
+			@RequestParam("id") int id,HttpServletRequest req) {
 		Department dept = new Department();
 		dept.setId(id);
-		ModelAndView modelAndView = new ModelAndView("redirect:" + GET_DEPTS);
+		ModelAndView modelAndView = new ModelAndView("forward:" + GET_DEPTS);
 		try {
 			departmentService.deleteDepartment(dept);
+			req.setAttribute("delMsg", "Department deleted");
 		} catch (UserException e) {
-			modelAndView.addObject("msg",e.getMessage());
+			req.setAttribute("errorMsg",e.getMessage());
 		}
 		return modelAndView;
 	}

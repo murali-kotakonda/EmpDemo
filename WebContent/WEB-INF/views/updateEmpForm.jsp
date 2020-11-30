@@ -9,7 +9,6 @@
 	function check() {
 	
 	 var loginName = document.forms["empUpdate"]["loginName"];
-	 var password = document.forms["empUpdate"]["password"] ;
 	 var fName = document.forms["empUpdate"]["fName"];
 	 var mobileNo = document.forms["empUpdate"]["mobileNo"];
 	 var salary = document.forms["empUpdate"]["salary"];
@@ -17,12 +16,6 @@
 	 if(loginName.value == "" ){
 		 alert( "Please provide loginName!" );
 		 loginName.focus() ;
-	     return false;
-	 }
-	 
-	 if(password.value == "" ){
-		 alert( "Please provide Password!" );
-		 password.focus() ;
 	     return false;
 	 }
 	 
@@ -102,7 +95,22 @@ function isNumber(evt) {
 		</tr>	
 		
 		<tr>
-			<td><label id="mStatusLbl">Marital Status:</label></td> <td> <form:input path="maritalStatus" /></td>
+			<td><label id="statusLbl">Status:</label></td> 
+			<td>  <form:select path="login.status">
+				        <form:option value="1">Active</form:option>
+				        <form:option value="0">Inactive</form:option>
+ 				</form:select></td>
+		</tr>	
+		
+		<tr>
+			<td><label id="mStatusLbl">Marital Status:</label></td> 
+			<td>
+			   <form:select path="maritalStatus">
+				        <form:option value="single">Single</form:option>
+				        <form:option value="divorsed">Divorsed</form:option>
+				        <form:option value="married">Married</form:option>
+ 				</form:select>
+			 </td>
 		</tr>
 			   
 					<c:forEach var="i" begin="0" end="1">

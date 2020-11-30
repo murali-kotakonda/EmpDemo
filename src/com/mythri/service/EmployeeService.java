@@ -16,7 +16,7 @@ public interface EmployeeService {
 	
 	public CreateEmpDetails getManagerAndDepts();
 
-	public Employee getValidEmpByAuth(Employee employee);
+	public Employee getValidEmpByAuth(Employee employee)throws UserException;
 	
 	public Employee getEmpById(int id);
 	
@@ -33,4 +33,6 @@ public interface EmployeeService {
 	public List<Employee> getBasicEmpDetails();
 
 	public boolean changePwd(Employee employee, String oldPass, String newPass);
+
+	public ResponseDTO<Employee> getAllSubordinates(Integer managerId);
 }

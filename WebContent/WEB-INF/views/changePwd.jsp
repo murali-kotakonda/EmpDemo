@@ -5,14 +5,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Employee Management App- Change Pass</title>
+<title>Change Pass</title>
 </head>
 <script type="text/javascript">
 
 function check() {
-	 var currPass = document.forms["changePass"]["currPass"];
-	 var newPass = document.forms["changePass"]["newPass"] ;
-	 var confirmPass = document.forms["changePass"]["confirmPass"];
+	 var currPass = document.forms["changePwd"]["currPass"];
+	 var newPass = document.forms["changePwd"]["newPass"] ;
+	 var confirmPass = document.forms["changePwd"]["confirmPass"];
 	 
 	 if(currPass.value == "" ){
 		 alert( "Please provide current Password!" );
@@ -26,15 +26,27 @@ function check() {
 	     return false;
 	 }
 	 
+	 if(newPass.value.length <5 || newPass.value.length >=10){
+		 alert( "password has to be minimum 5 chars and max 10 chars!" );
+		 newPass.focus() ;
+	     return false;
+	 }
+	 
 	 if(confirmPass.value == "" ){
 		 alert( "Please provide confirm new Password!" );
 		 confirmPass.focus() ;
 	     return false;
 	 }
+	 
+	 if(newPass.value != confirmPass.value ){
+		 alert( "New Pass and  confirmPass should be same!" );
+		 newPass.focus() ;
+	     return false;
+	 }
 	 return true;
 }
-
 </script>
+
 <body>
 	<jsp:include page="header.jsp" />
 	<h3>Change Password Screen</h3>

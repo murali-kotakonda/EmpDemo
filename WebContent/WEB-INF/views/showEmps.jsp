@@ -9,7 +9,8 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
+<br/>
+<font color="red">${msg}</font>
 <c:if test="${emps != null}">
 	<c:set var="pageUrl" value="getAllEmps" scope="request"/>
 	<jsp:include page="employeesList.jsp"/>

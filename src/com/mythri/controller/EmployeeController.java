@@ -32,17 +32,12 @@ import com.mythri.entity.Employee;
 import com.mythri.service.EmployeeService;
 import com.mythri.util.UserException;
 
-/**
- * @author Murali
- * 
- * Class to handle all Http Requests for employee. 
- *
- */
-
 @Controller
 public class EmployeeController {
 
+	
 	private static final String GET_ALL_EMPS = "getAllEmps";
+	
 	@Autowired
 	private EmployeeService employeeService;
 	
@@ -125,12 +120,27 @@ public class EmployeeController {
 		return new ModelAndView("showEmps", map);
 	}
 	
+	@RequestMapping(value = "mySubordinates", method = RequestMethod.GET)
+	public ModelAndView mySubordinates(HttpSession session) {
+		Employee employee = (Employee) session.getAttribute("empSession");
+		ResponseDTO<Employee> dto = employeeService.getAllSubordinates(employee.getId());
+		List<Employee> listOfEmployees = dto.getResponseList();
+		Map<String, Object> map = new HashMap<>();
+		map.put("emps", listOfEmployees);
+		return new ModelAndView("showSubordinates", map);
+	}
+	
 	@RequestMapping(value = EMP_DELETE, method = RequestMethod.GET)
 	public ModelAndView deleteEmployee(@RequestParam("id") int id) {
 		Employee emp = new Employee();
 		emp.setId(id);
 		employeeService.deleteEmployee(emp);
-		return new ModelAndView("employeesList");
+		ResponseDTO<Employee> dto = employeeService.getAllEmps(null);
+		List<Employee> listOfEmployees = dto.getResponseList();
+		Map<String, Object> map = new HashMap<>();
+		map.put("emps", listOfEmployees);
+		map.put("msg", "Employee Deletion successfull");
+		return new ModelAndView("showEmps", map);
 	}
 
 	@RequestMapping(value = EMP_UPDATE, method = RequestMethod.GET)
@@ -149,6 +159,13 @@ public class EmployeeController {
 			HttpSession session) {
 		try {
 			Employee emp = employeeService.updateEmployee(employee);
+			Employee empFromSession = (Employee) session.getAttribute("empSession");
+			if(!empFromSession.getId().equals(employee.getId())) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("employee", emp);
+				map.put("msg", "Employee Update successfull");
+				return new ModelAndView("searchEmp", map);
+			}
 			session.setAttribute("empSession", emp);
 			ModelAndView modelAndView = new ModelAndView("empProfile","employee",emp);
 			modelAndView.addObject("addresses", emp.getAddresses());

@@ -29,10 +29,10 @@ import com.mythri.dto.ResponseDTO;
 import com.mythri.entity.Address;
 import com.mythri.entity.Department;
 import com.mythri.entity.Employee;
+import com.mythri.entity.Login;
 
 @Repository("employeeDao")
 public class EmployeeDaoImpl implements EmployeeDao {
-
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -81,6 +81,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		if (StringUtils.isNotEmpty(source.getMaritalStatus())) {
 			target.setMaritalStatus(source.getMaritalStatus());
 		}
+		Login targetLogin = target.getLogin();
+		targetLogin.setStatus(source.getLogin().getStatus());
 		
 		List<Address> targetAddrss = target.getAddresses();
 		List<Address> sourceAddrss = source.getAddresses();
@@ -205,7 +207,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		session.close();
 	}
 
-	public Employee searchByName(String name) {
+	public Employee getEmployeeByName(String name) {
 		Session session = sessionFactory.openSession();
 		Criteria c = session.createCriteria(Employee.class);
 		Criterion cr = Restrictions.eq("fName", name);
@@ -250,7 +252,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public ResponseDTO<Employee> getAllEmps(String sortBy) {
 		Session session = sessionFactory.openSession();
 		Criteria c = session.createCriteria(Employee.class);
-		c.addOrder(Order.asc(sortBy));
+		if(!StringUtils.isEmpty(sortBy))
+			c.addOrder(Order.asc(sortBy));
 		List<Employee> list = c.list();
 		ResponseDTO<Employee> responseDTO = new ResponseDTO<Employee>(0, list);
 		session.close();
@@ -295,5 +298,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		List<Employee> emps = getEmpList(list);
 		s.close();
 		return emps;
+	}
+
+	@Override
+	public Integer  isValidLoginName(String loginName) {
+		Session session = sessionFactory.openSession();
+		Query q = session
+				.createQuery("select id from Employee where loginName=:loginName");
+		q.setParameter("loginName", loginName);
+		Integer  count = (Integer ) q.uniqueResult();
+		session.close();
+		return count;
+	}
+
+	@Override
+	public ResponseDTO<Employee> getAllSubordinates(Integer managerId) {
+		Session s = sessionFactory.openSession();
+		// List<Employee> emps =(List<Employee>) s.createQuery("from Employee e  where e.manager.id=:id").list();
+		Query query = s.createQuery("from Employee e  where e.manager.id=:id");
+		query.setParameter("id",managerId);
+		List<Employee> emps = (List<Employee>)query.list();
+		s.close();
+		ResponseDTO<Employee> responseDTO = new ResponseDTO<Employee>(0, emps);
+		return responseDTO;
 	}
 }

@@ -15,7 +15,7 @@
 		   				<h3>
 		   				<label id="permAddrLbl">Permanent Address :</label></h3>
 		   			</c:if>
-	<table border="1" width="30%">
+	<table border="1" width="35%">
 			     <tr>
 			        <td width="15%">
 			     <label id="addr1Lbl${i}">Address Line 1:</label> </td>

@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <h3><label id="searchEmpIdFormLbl">Search Employee ID Form</label></h3>
-<font color="Red">${msg}</font>
+<font id="errorMsg" color="Red">${msg}</font>
 
 
 <form:form action="./searchEmp">

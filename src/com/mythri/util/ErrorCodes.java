@@ -2,11 +2,13 @@ package com.mythri.util;
 
 public enum ErrorCodes {
 	//common places for all error codes
-	
-	ERROR1("erro1","age is invalid"),
-	ERROR2("erro2","Name already exists"),
-	ERROR3("erro3","Name doesnt exists.."),
-	ERROR4("erro4","There are existing employess for the department Id.");
+	ERROR1("Error1","age is invalid."),
+	ERROR2("Error2","LoginName already exists."),
+	ERROR3("Error3","Name doesnt exists."),
+	ERROR4("Error4","There are existing employess for the department Id."),
+	ERROR5("Error5","You have exceded Maximum no of attempts.Please contact Admin"),
+	ERROR6("Error6","Your account is inActive.Please contact Admin."),
+	ERROR7("Error7","Invalid Login.");
 	
 	private String errorCode;
 	private String desc;
@@ -23,7 +25,4 @@ public enum ErrorCodes {
 	public String getDesc() {
 		return desc;
 	}
-	
-	
-	
 }

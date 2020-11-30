@@ -9,9 +9,13 @@
 </head>
 <body>
 <h3>Search Result</h3>
-	<table align="left" border="1">
+	<a href="empUpdate?id=${employee.id}"><label id="updateProfile">Update Profile</label></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="empDelete?id=${employee.id}"><label id="deleteLbl">Delete Profile</label></a>
+ <br/><br/><br/>
+	<table align="left" border="1" width="35%">
 		<tr>
-			<td><label id="idLbl">ID</label></td> <td> ${employee.id}</td>
+			<td><label id="idLbl">ID</label></td>
+			 <td> ${employee.id}</td>
 		</tr>
 		
 		<tr>
@@ -60,9 +64,9 @@
 		
 		<tr>
 			<td><label id="statusLbl">Status:</label></td>
-			 <td> ${employee.status}</td>
+			 <td> ${employee.login.status eq 1?'Active' :'Inactive'}</td>
 		</tr>
  	</table>
- 	
+		
 </body>
 </html>

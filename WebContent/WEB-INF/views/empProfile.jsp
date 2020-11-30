@@ -13,7 +13,7 @@
  
  <br/><br/>
 <div>
-	<table border="1" width="30%">
+	<table border="1" width="35%">
 		<tr>
 			<td width="15%"><label id="idLbl">ID</label></td> <td width="15%"> ${employee.id}</td>
 		</tr>
@@ -68,14 +68,9 @@
 		<tr>
 			<td><label id="martialStatusLbl">Marital Status:</label></td> <td> ${employee.maritalStatus}</td>
 		</tr>
-		
-		<tr>
-			<td><label id="statusLbl">Status:</label></td> 
-			<td> ${employee.status}</td>
-		</tr>	
+		 	
   	</table>
  	<br/>
-
  	<jsp:include page="showAddresses.jsp"/>
 
 </div>

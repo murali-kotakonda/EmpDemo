@@ -65,6 +65,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 				<value>com.mythri.entity.Employee</value>
 				<value>com.mythri.entity.Department</value>
 				<value>com.mythri.entity.Address</value>
+				<value>com.mythri.entity.Login</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

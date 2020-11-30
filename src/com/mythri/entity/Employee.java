@@ -17,9 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @NamedQueries(
 value =
@@ -32,7 +34,8 @@ value =
  @NamedQuery(name =Employee.CHECK_EMP_EXISTS,query = "select count(*) from Employee  where loginname=:inputName"),
  @NamedQuery(name =Employee.GET_EMPLOYEE_WITH_ADDRESSES,query = 
  "from Employee e LEFT JOIN FETCH e.addresses a  "
- + "LEFT JOIN FETCH e.manager mgr "
+ + " LEFT JOIN FETCH e.manager mgr "
+ + " LEFT JOIN FETCH e.login l "
  + "where e.id=:id"),
  @NamedQuery(name =Employee.GET_MANAGER_INFO,query = "select id,fName,lName from Employee where designation='Manager' OR designation='MANAGER'"),
  @NamedQuery(name =Employee.GET_BASIC_EMP_DETAILS,query = "select id,fName,lName from Employee "),
@@ -111,18 +114,19 @@ public class Employee implements Serializable {
 	@JoinColumn(name = "deptId", nullable = true)
 	private Department department;
 	
-	@Column(name = "status")
-	private String status;
-	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<Address> addresses;
 	
-	public String getStatus() {
-		return status;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "loginId")
+	private Login login;
+
+	public Login getLogin() {
+		return login;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 
 	public String getMobileNo() {

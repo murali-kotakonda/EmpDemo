@@ -74,28 +74,41 @@ li.dropdown {
   <li><a  href="empProfile"><label id="myProfileLbl">My Profile</label></a></li>
   
   <li class="dropdown">
+   
     <a href="javascript:void(0)" class="dropbtn">
     <label id="EmployeeLbl">Employee</label>
     </a>
     <div class="dropdown-content">
+    
     <c:if test='${sessionScope["empSession"].admin}'>
  	 	<a  href="empCreate">
  	 	<label id="addEmpLbl">Add New Employee</label>
  	 	</a> 
   	</c:if>
+    
       <a href="searchEmp">
       <label id="searchEmpLbl">Search Employee</label>
       </a>
+    
       <a href="empGetByFilters">
       <label id="advSearchEmpLbl">Advance Search</label>
       </a>
+   
      <c:if test='${sessionScope["empSession"].admin}'>
       <a href="getAllEmps">
       <label id="showEmpsLbl">Show All Employees</label>
       </a>
       </c:if>
+      
     </div>
   </li>
+ 
+  <c:if test="${sessionScope['empSession'].designation eq 'MANAGER'}">
+	  <li><a name="mySubordinates" href="mySubordinates">
+	 <label id="subordinatesLbl">My Subordinates</label>
+	 </a></li>
+ </c:if>
+  
   
 <c:if test='${sessionScope["empSession"].admin}'>
   <li class="dropdown">

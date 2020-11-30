@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mythri.entity.Employee;
 import com.mythri.service.EmployeeService;
+import com.mythri.util.UserException;
 
 @Controller
 public class CommonController {
@@ -56,15 +57,19 @@ public class CommonController {
 	
 	@RequestMapping(value = LOGIN, method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute(COMMAND) Employee employee,
-			BindingResult result,HttpSession session) {
-		Employee validUser = employeeService.getValidEmpByAuth(employee);
-		if (validUser!=null){
+			BindingResult result, HttpSession session) {
+		try {
+			Employee validUser = employeeService.getValidEmpByAuth(employee);
 			session.setAttribute("empSession", validUser);
-			ModelAndView modelAndView = new ModelAndView("empProfile","employee",validUser);
+			ModelAndView modelAndView = new ModelAndView("empProfile", "employee", validUser);
 			modelAndView.addObject("addresses", validUser.getAddresses());
 			return modelAndView;
+		} catch (UserException e) {
+			String msg = e.getMessage();
+			ModelAndView modelAndView = new ModelAndView("login", COMMAND, employee);
+			modelAndView.addObject("msg", msg);
+			return modelAndView;
 		}
-		return new ModelAndView("login","msg","Invalid Login");
 	}
 
 	@RequestMapping(LOGOUT)

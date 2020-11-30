@@ -36,8 +36,7 @@
 			<th><label id="statusLbl">Status</label></th>
 			</c:if>
 			
-			
-			 <c:if test='${empty sessionScope["empSession"].admin}'> 
+			<c:if test='${sessionScope["empSession"].admin}'>
    		 			<th>Action</th>
 			</c:if>
 		</tr>
@@ -54,10 +53,13 @@
 				<td> ${employee.deptName}</td>
 				<td> ${employee.joinDate}</td>
 				<td> ${employee.mobileNo}</td>
-				<c:if test='${empty sessionScope["empSession"].admin}'> 
-		   		 						<td align="center"><a href="empUpdate?id=${employee.id}">Edit</a> | <a href="empDelete?id=${employee.id}">Delete</a></td>
+				<td> ${employee.login.status eq 1?'Active' :'Inactive'}</td>
+				<c:if test='${sessionScope["empSession"].admin}'> 
+		   		 		 <td align="center">
+		   		 		 <a href="empUpdate?id=${employee.id}">Edit</a> | <a href="empDelete?id=${employee.id}">Delete</a>
+		   		 		 </td>
 				</c:if>
-  			   <td> ${employee.status}</td>
+  			   
 			</tr>
 		</c:forEach>
 	</tbody>

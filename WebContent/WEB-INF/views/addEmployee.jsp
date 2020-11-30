@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+	<title>Add Employee</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	</head>
 	<script type="text/javascript">
@@ -25,6 +26,12 @@
 	 
 	 if(password.value == "" ){
 		 alert( "Please provide Password!" );
+		 password.focus() ;
+	     return false;
+	 }
+	 
+	 if(password.value.length <= 5 || password.value.length >=10){
+		 alert( "password has to be minimum 5 chars and max 10 chars!" );
 		 password.focus() ;
 	     return false;
 	 }
@@ -51,10 +58,72 @@
 		 salary.focus() ;
 	     return false;
 	 }
+	 
+	 var inputText = document.forms["empCreate"]["dateOfBirth"];
+	 var dateformat = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
+	  // Match the date format through regular expression
+	  if(inputText.value.match(dateformat))
+	  {
+		 inputText.focus();
+	  //Test which seperator is used '/' or '-'
+	  var opera1 = inputText.value.split('/');
+	  var opera2 = inputText.value.split('-');
+	  lopera1 = opera1.length;
+	  lopera2 = opera2.length;
+	  // Extract the string into month, date and year
+	  if (lopera1>1)
+	  {
+	  var pdate = inputText.value.split('/');
+	  }
+	  else if (lopera2>1)
+	  {
+	  var pdate = inputText.value.split('-');
+	  }
+	  var mm  = parseInt(pdate[0]);
+	  var dd = parseInt(pdate[1]);
+	  var yy = parseInt(pdate[2]);
+	  // Create list of days of a month [assume there is no leap year by default]
+	  var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+	  if (mm==1 || mm>2)
+	  {
+	  if (dd>ListofDays[mm-1])
+	  {
+	  alert('Invalid date format!');
+	  inputText.focus();
+	  return false;
+	  }
+	  }
+	  if (mm==2)
+	  {
+	  var lyear = false;
+	  if ( (!(yy % 4) && yy % 100) || !(yy % 400)) 
+	  {
+	  lyear = true;
+	  }
+	  if ((lyear==false) && (dd>=29))
+	  {
+	  alert('Invalid date format!');
+	  inputText.focus();
+	  return false;
+	  }
+	  if ((lyear==true) && (dd>29))
+	  {
+	  alert('Invalid date format!');
+	  inputText.focus();
+	  return false;
+	  }
+	  }
+	  }
+	  else
+	  {
+	  alert("Invalid date format!");
+	  inputText.focus();
+	  return false;
+	  }
 	 return true;
 }
-
-function isNumber(evt) {
+	
+ function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -67,7 +136,7 @@ function isNumber(evt) {
 	<body>
 	<jsp:include page="header.jsp"/>
 		<h2>Add Employee Data</h2>
-		<font color="red"> ${errorMsg }</font>
+		<font id="errorMsg" color="red"> ${errorMsg }</font>
 		<form:form method="post" action="empCreate" name="empCreate" commandName="command" onsubmit="return check();">
 	   		<table>
 			   <tr>
@@ -117,9 +186,9 @@ function isNumber(evt) {
 			    <tr>
 			        <td><label id="statusLbl">Status:</label></td>
 			        <td>
-			        <form:select path="status">
-			      		<form:option value="Active">Active</form:option>
-			      		<form:option value="Inactive">Inactive</form:option>
+			        <form:select path="login.status">
+			      		<form:option value="1">Active</form:option>
+			      		<form:option value="0">Inactive</form:option>
 			      	</form:select>
 			        </td>
 			    </tr>

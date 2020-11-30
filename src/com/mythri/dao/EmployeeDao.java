@@ -23,7 +23,7 @@ public interface EmployeeDao {
 	
 	public void deleteEmployee(Employee employee);
 
-	public Employee searchByName(String name);
+	public Employee getEmployeeByName(String name);
 
 	public ResponseDTO<Employee> getAdvancedSearchResult(EmployeeRequest employeeReq);
 
@@ -34,5 +34,9 @@ public interface EmployeeDao {
 	public List<Employee> getBasicEmpDetails();
 
 	public void updatePwd(Integer id, String newPass);
+
+	public Integer  isValidLoginName(String loginName);
+
+	public ResponseDTO<Employee> getAllSubordinates(Integer managerId);
 
 }

@@ -37,5 +37,22 @@
 		
 	</table>
 	</c:if>
+	
+<c:if test="${not empty delMsg}">
+	<script>
+	window.onload = function(){
+		alert('Department deleted');
+	}
+	</script>
+</c:if>		
+
+<c:if test="${not empty errorMsg}">
+<script>
+window.onload = function(){
+		alert('Department cannot be deleted as there are associated employees.');
+	}
+	</script>
+</c:if>		
+	
 </body>
 </html>
