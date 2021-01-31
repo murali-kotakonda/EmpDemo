@@ -11,8 +11,10 @@ public boolean supports(Class<?> clazz) {
 	}
 	public void validate(Object command, Errors errors) {
 		EmployeeCommand ec=(EmployeeCommand)command;
-		String nm=ec.getName();    String pwd=ec.getPassword();
-		String city=ec.getCity();    String utype=ec.getUserType();
+		String nm=ec.getName();    
+		String pwd=ec.getPassword();
+		String city=ec.getCity();   
+		String utype=ec.getUserType();
 		int age=ec.getAge();
 		
 		if(nm==null || nm.length()==0){

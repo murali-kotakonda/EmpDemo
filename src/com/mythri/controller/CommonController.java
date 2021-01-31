@@ -24,6 +24,7 @@ import com.mythri.util.UserException;
 @Controller
 public class CommonController {
 	
+	private static final String EMP_SESSION = "empSession";
 	@Autowired
 	private EmployeeService employeeService;
 
@@ -46,7 +47,7 @@ public class CommonController {
 	public ModelAndView changePwd(HttpSession session,
 			@RequestParam("currPass") String oldPass,
 			@RequestParam("newPass") String newPass) {
-		Employee employee = (Employee) session.getAttribute("empSession");
+		Employee employee = (Employee) session.getAttribute(EMP_SESSION);
 		boolean changePwd = employeeService.changePwd(employee, oldPass, newPass);
 		String msg = "Invalid Old password";
 		if (changePwd) {
@@ -60,7 +61,7 @@ public class CommonController {
 			BindingResult result, HttpSession session) {
 		try {
 			Employee validUser = employeeService.getValidEmpByAuth(employee);
-			session.setAttribute("empSession", validUser);
+			session.setAttribute(EMP_SESSION, validUser);
 			ModelAndView modelAndView = new ModelAndView("empProfile", "employee", validUser);
 			modelAndView.addObject("addresses", validUser.getAddresses());
 			return modelAndView;
@@ -75,7 +76,7 @@ public class CommonController {
 	@RequestMapping(LOGOUT)
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		session.removeAttribute("empSession");
+		session.removeAttribute(EMP_SESSION);
 		session.invalidate();
 		return "login";
 	}

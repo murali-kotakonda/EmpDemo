@@ -280,7 +280,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	private List<Employee> getEmpList(List<Object[]> list1) {
-		List<Employee> emps = new ArrayList<Employee>();
+		List<Employee> emps = new ArrayList<>();
 		for(Object[] o:list1){
 			Employee e = new Employee();
 			e.setId((Integer)o[0]);
@@ -294,7 +294,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> getBasicEmpDetails() {
 		Session s = sessionFactory.openSession();
-		List<Object[]> list =(List<Object[]>) s.getNamedQuery(GET_BASIC_EMP_DETAILS).list();
+		List<Object[]> list =  s.getNamedQuery(GET_BASIC_EMP_DETAILS).list();
 		List<Employee> emps = getEmpList(list);
 		s.close();
 		return emps;
