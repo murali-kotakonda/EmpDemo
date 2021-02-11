@@ -47,7 +47,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+    <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
 	
 	<bean id="dataSource1"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
